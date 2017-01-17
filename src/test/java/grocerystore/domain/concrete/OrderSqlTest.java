@@ -1,6 +1,7 @@
 package grocerystore.domain.concrete;
 
-import grocerystore.domain.entities.Order;
+import grocerystore.domain.concrete.onlyjdbc.OrderSql;
+import grocerystore.domain.models.Order;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

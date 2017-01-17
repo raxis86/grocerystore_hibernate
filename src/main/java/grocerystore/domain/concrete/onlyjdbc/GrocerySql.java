@@ -1,11 +1,10 @@
-package grocerystore.domain.concrete;
+package grocerystore.domain.concrete.onlyjdbc;
 
 import grocerystore.domain.abstracts.IRepositoryGrocery;
-import grocerystore.domain.entities.Grocery;
+import grocerystore.domain.models.Grocery;
 import grocerystore.domain.exceptions.GroceryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -19,7 +18,7 @@ import static grocerystore.constants.Constants.*;
  * Created by raxis on 27.12.2016.
  * Реализакция DAO для работы с grocery в MySQL
  */
-@Repository
+/*@Repository*/
 public class GrocerySql extends SQLImplementation implements IRepositoryGrocery {
     private static final Logger logger = LoggerFactory.getLogger(GrocerySql.class);
 

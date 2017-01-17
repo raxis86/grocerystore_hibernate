@@ -46,7 +46,7 @@
     <b:bean id="userDetailsService" class="grocerystore.services.security.UserDetailsServiceImpl">
         <b:constructor-arg name="user" ref="userSql"/>
     </b:bean>
-    <b:bean id="userSql" class="grocerystore.domain.concrete.UserSql"/>
+    <b:bean id="userSql" class="grocerystore.domain.concrete.onlyjdbc.UserSql"/>
 
 
 </b:beans>

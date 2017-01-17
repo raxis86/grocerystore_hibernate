@@ -1,6 +1,6 @@
 package grocerystore.domain.abstracts;
 
-import grocerystore.domain.entities.Grocery;
+import grocerystore.domain.models.Grocery;
 
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
 package grocerystore.domain.abstracts;
 
-import grocerystore.domain.entities.Order;
+import grocerystore.domain.models.Order;
 import grocerystore.domain.exceptions.OrderException;
 
 import java.util.List;

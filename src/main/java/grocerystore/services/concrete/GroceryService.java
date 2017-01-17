@@ -2,8 +2,8 @@ package grocerystore.services.concrete;
 
 import grocerystore.domain.abstracts.IRepositoryGrocery;
 import grocerystore.domain.abstracts.IRepositoryListGrocery;
-import grocerystore.domain.entities.Grocery;
-import grocerystore.domain.entities.ListGrocery;
+import grocerystore.domain.models.Grocery;
+import grocerystore.domain.models.ListGrocery;
 import grocerystore.domain.exceptions.DAOException;
 import grocerystore.domain.exceptions.ListGroceryException;
 import grocerystore.services.abstracts.IGroceryService;
@@ -15,12 +15,9 @@ import grocerystore.services.validators.abstracts.IValidator;
 import javafx.util.converter.BigDecimalStringConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 

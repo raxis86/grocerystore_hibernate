@@ -1,7 +1,7 @@
-package grocerystore.domain.concrete;
+package grocerystore.domain.concrete.onlyjdbc;
 
 import grocerystore.domain.abstracts.IRepositoryRole;
-import grocerystore.domain.entities.Role;
+import grocerystore.domain.models.Role;
 import grocerystore.domain.exceptions.RoleException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

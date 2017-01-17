@@ -1,7 +1,8 @@
 package grocerystore.domain.concrete;
 
-import grocerystore.domain.entities.User;
-import grocerystore.domain.entities.Role;
+import grocerystore.domain.concrete.onlyjdbc.UserSql;
+import grocerystore.domain.models.User;
+import grocerystore.domain.models.Role;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

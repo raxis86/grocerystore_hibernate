@@ -1,4 +1,4 @@
-package grocerystore.domain.concrete;
+package grocerystore.domain.concrete.onlyjdbc;
 
 import grocerystore.tools.DatabaseManager;
 

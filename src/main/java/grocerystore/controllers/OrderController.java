@@ -1,6 +1,6 @@
 package grocerystore.controllers;
 
-import grocerystore.domain.entities.User;
+import grocerystore.domain.models.User;
 import grocerystore.services.abstracts.IListGroceryService;
 import grocerystore.services.abstracts.IOrderService;
 import grocerystore.services.abstracts.IUserService;

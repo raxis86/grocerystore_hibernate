@@ -1,10 +1,8 @@
 package grocerystore.services.abstracts;
 
-import grocerystore.domain.entities.Grocery;
-import grocerystore.domain.exceptions.DAOException;
+import grocerystore.domain.models.Grocery;
 import grocerystore.services.exceptions.FormGroceryException;
 import grocerystore.services.exceptions.GroceryServiceException;
-import grocerystore.services.models.Message;
 
 import java.util.List;
 

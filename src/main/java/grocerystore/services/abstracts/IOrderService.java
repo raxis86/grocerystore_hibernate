@@ -1,7 +1,7 @@
 package grocerystore.services.abstracts;
 
-import grocerystore.domain.entities.Order;
-import grocerystore.domain.entities.User;
+import grocerystore.domain.models.Order;
+import grocerystore.domain.models.User;
 import grocerystore.services.exceptions.OrderServiceException;
 import grocerystore.services.models.Cart;
 import grocerystore.services.viewmodels.OrderView;

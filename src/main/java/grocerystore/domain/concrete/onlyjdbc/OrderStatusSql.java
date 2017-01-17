@@ -1,11 +1,10 @@
-package grocerystore.domain.concrete;
+package grocerystore.domain.concrete.onlyjdbc;
 
 import grocerystore.domain.abstracts.IRepositoryOrderStatus;
-import grocerystore.domain.entities.OrderStatus;
+import grocerystore.domain.models.OrderStatus;
 import grocerystore.domain.exceptions.OrderStatusException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;

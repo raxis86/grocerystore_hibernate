@@ -1,7 +1,6 @@
 package grocerystore.services.abstracts;
 
-import grocerystore.domain.entities.Order;
-import grocerystore.domain.exceptions.DAOException;
+import grocerystore.domain.models.Order;
 import grocerystore.services.exceptions.ListGroceryServiceException;
 import grocerystore.services.models.Cart;
 

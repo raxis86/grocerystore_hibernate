@@ -1,16 +1,14 @@
 package grocerystore.services.concrete;
 
 import grocerystore.domain.abstracts.IRepositoryGrocery;
-import grocerystore.domain.entities.Grocery;
+import grocerystore.domain.models.Grocery;
 import grocerystore.domain.exceptions.DAOException;
 import grocerystore.services.abstracts.ICartService;
 import grocerystore.services.exceptions.CartServiceException;
 import grocerystore.services.models.Cart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

@@ -1,6 +1,6 @@
 package grocerystore.services.abstracts;
 
-import grocerystore.domain.entities.User;
+import grocerystore.domain.models.User;
 import grocerystore.services.exceptions.AccountServiceException;
 import grocerystore.services.models.AuthUser;
 

@@ -5,16 +5,13 @@ import grocerystore.services.abstracts.IUserService;
 import grocerystore.services.exceptions.AccountServiceException;
 import grocerystore.services.exceptions.FormUserException;
 import grocerystore.services.exceptions.UserServiceException;
-import grocerystore.services.models.AuthUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,12 +58,12 @@ public class AccountController {
                          @RequestParam("address") String address)
             throws UserServiceException, FormUserException, AccountServiceException {
 
-        AuthUser authUser;
+        boolean isSignin=false;
 
-        authUser = accountService.signIn(userService.formUser(email,password,name,lastname,
+        isSignin = accountService.signIn(userService.formUser(email,password,name,lastname,
                 surname,address,phone,"ROLE_USER"));
 
-        if(authUser!=null){
+        if(isSignin){
             return "signinsuccess";
         }
         else {

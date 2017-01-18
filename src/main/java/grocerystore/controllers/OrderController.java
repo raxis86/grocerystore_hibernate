@@ -1,6 +1,6 @@
 package grocerystore.controllers;
 
-import grocerystore.domain.models.User;
+import grocerystore.domain.models.User_model;
 import grocerystore.services.abstracts.IListGroceryService;
 import grocerystore.services.abstracts.IOrderService;
 import grocerystore.services.abstracts.IUserService;
@@ -37,21 +37,21 @@ public class OrderController {
     }
 
     @ModelAttribute("user")
-    public User populateUser() throws UserServiceException, FormUserException {
+    public User_model populateUser() throws UserServiceException, FormUserException {
 
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        User user = userService.formUserFromRepo(principal.getUsername());
-        return user;
+        User_model userModel = userService.formUserFromRepo(principal.getUsername());
+        return userModel;
     }
 
     @RequestMapping(value = "OrderList", method = RequestMethod.GET)
-    public String list(@ModelAttribute("user") User user, Model model)
+    public String list(@ModelAttribute("user") User_model userModel, Model model)
                        throws OrderServiceException {
 
 
-        if(user!=null){
-            model.addAttribute("orderlist",orderService.formOrderViewList(user));
+        if(userModel !=null){
+            model.addAttribute("orderlist",orderService.formOrderViewList(userModel));
             return "orderlist";
         }
         else {
@@ -91,9 +91,9 @@ public class OrderController {
     }
 
     @RequestMapping(value = "OrderAdd", method = RequestMethod.GET)
-    public String add(@ModelAttribute("user") User user, @ModelAttribute("cart") Cart cart, Model model){
-        if((cart!=null)&&(user!=null)){
-            model.addAttribute("user",user);
+    public String add(@ModelAttribute("user") User_model userModel, @ModelAttribute("cart") Cart cart, Model model){
+        if((cart!=null)&&(userModel !=null)){
+            model.addAttribute("user", userModel);
             model.addAttribute("cart",cart);
             model.addAttribute("totalprice",cart.computeTotalPrice().toString());
             return "orderadd";
@@ -104,7 +104,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "OrderAdd", method = RequestMethod.POST)
-    public String add(@ModelAttribute("user") User user, @ModelAttribute("cart") Cart cart,
+    public String add(@ModelAttribute("user") User_model userModel, @ModelAttribute("cart") Cart cart,
                       @RequestParam("name") String name, @RequestParam("lastname") String lastname,
                       @RequestParam("surname") String surname, @RequestParam("address") String address,
                       @RequestParam("phone") String phone)
@@ -112,9 +112,9 @@ public class OrderController {
                              OrderServiceException,
                              ListGroceryServiceException {
 
-        if((cart!=null)&&(user!=null)){
-            userService.updateUser(user,name,lastname,surname,address,phone);
-            listGroceryService.createListGrocery(cart,orderService.createOrder(user,cart));
+        if((cart!=null)&&(userModel !=null)){
+            userService.updateUser(userModel,name,lastname,surname,address,phone);
+            listGroceryService.createListGrocery(cart,orderService.createOrder(userModel,cart));
             cart.clear();
             return "ordersuccess";
         }

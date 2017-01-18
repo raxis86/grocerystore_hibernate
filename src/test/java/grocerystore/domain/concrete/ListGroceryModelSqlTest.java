@@ -1,3 +1,4 @@
+/*
 package grocerystore.domain.concrete;
 
 import grocerystore.domain.concrete.onlyjdbc.ListGrocerySql;
@@ -19,20 +20,24 @@ import java.util.UUID;
 
 import static org.junit.Assert.*;
 
+*/
 /**
  * Created by raxis on 03.01.2017.
- */
-public class ListGrocerySqlTest {
+ *//*
+
+public class ListGroceryModelSqlTest {
     private EmbeddedDatabase db;
     private ListGrocerySql listGroceryHandler;
     private DataSource ds;
-    private ListGrocery listGrocery;
-    private List<ListGrocery> listGroceryList;
+    private ListGrocery_model listGrocery;
+    private List<ListGrocery_model> listGroceryList;
 
-    /**
+    */
+/**
      * Создание тестовой базы H2 из готовых скриптов
      * @throws Exception
-     */
+     *//*
+
     @Before
     public void setUp() throws Exception {
         db = new EmbeddedDatabaseBuilder()
@@ -46,7 +51,7 @@ public class ListGrocerySqlTest {
         listGroceryHandler.setDs(ds);
     }
 
-    private boolean queryAndGroceryEquals(String query, ListGrocery listGrocery){
+    private boolean queryAndGroceryEquals(String query, ListGrocery_model listGrocery){
         boolean flag=false;
 
         try(Connection connection = ds.getConnection();
@@ -66,10 +71,12 @@ public class ListGrocerySqlTest {
         return flag;
     }
 
-    /**
+    */
+/**
      * Тестирование метода getAll на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void getAll() throws Exception {
         listGroceryList = listGroceryHandler.getAll();
@@ -94,23 +101,27 @@ public class ListGrocerySqlTest {
         assertTrue(flag);
     }
 
-    /**
+    */
+/**
      * Тестирование метода getOne на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void getOne() throws Exception {
         listGrocery = listGroceryHandler.getOne(UUID.fromString("c44b23be-8e24-4096-911d-623d2794b716"));
         assertTrue(queryAndGroceryEquals("SELECT * FROM GROCERYLIST WHERE ID='c44b23be-8e24-4096-911d-623d2794b716'",listGrocery));
     }
 
-    /**
+    */
+/**
      * Тестирование метода create на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void create() throws Exception {
-        listGrocery = new ListGrocery();
+        listGrocery = new ListGrocery_model();
 
         listGrocery.setId(UUID.fromString("f47591f5-fa34-485f-8c02-618cb7ee88d5"));
         listGrocery.setGroceryId(UUID.fromString("1150b23a-e004-44b2-aa6f-aec18ae69d41"));
@@ -121,10 +132,12 @@ public class ListGrocerySqlTest {
         assertTrue(queryAndGroceryEquals("SELECT * FROM GROCERYLIST WHERE ID='f47591f5-fa34-485f-8c02-618cb7ee88d5'",listGrocery));
     }
 
-    /**
+    */
+/**
      * Тестирование метода delete на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void delete() throws Exception {
         int i=0;
@@ -155,13 +168,15 @@ public class ListGrocerySqlTest {
         assertTrue(i==1);
     }
 
-    /**
+    */
+/**
      * Тестирование метода update на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void update() throws Exception {
-        listGrocery = new ListGrocery();
+        listGrocery = new ListGrocery_model();
 
         listGrocery.setId(UUID.fromString("c44b23be-8e24-4096-911d-623d2794b716"));
         listGrocery.setGroceryId(UUID.fromString("1150b23a-e004-44b2-aa6f-aec18ae69d41"));
@@ -172,10 +187,12 @@ public class ListGrocerySqlTest {
         assertTrue(queryAndGroceryEquals("SELECT * FROM GROCERYLIST WHERE ID='c44b23be-8e24-4096-911d-623d2794b716'",listGrocery));
     }
 
-    /**
+    */
+/**
      * Тестирование метода getListById() на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void getListById() throws Exception {
         listGroceryList = listGroceryHandler.getListById(UUID.fromString("c44b23be-8e24-4096-911d-623d2794b716"));
@@ -200,10 +217,12 @@ public class ListGrocerySqlTest {
         assertTrue(flag);
     }
 
-    /**
+    */
+/**
      * Тестирование метода getListByGroceryId() на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void getListByGroceryId() throws Exception {
         listGroceryList = listGroceryHandler.getListByGroceryId(UUID.fromString("1150b23a-e004-44b2-aa6f-aec18ae69d41"));
@@ -233,4 +252,4 @@ public class ListGrocerySqlTest {
         db.shutdown();
     }
 
-}
+}*/

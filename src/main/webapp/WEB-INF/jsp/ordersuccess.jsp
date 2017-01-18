@@ -3,7 +3,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
-  User: raxis
+  User_model: raxis
   Date: 26.12.2016
   Time: 19:32
   To change this template use File | Settings | File Templates.

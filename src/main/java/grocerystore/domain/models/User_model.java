@@ -9,8 +9,8 @@ import java.util.UUID;
 /**
  * Created by raxis on 13.01.2017.
  */
-public class User {
-    private static final Logger logger = LoggerFactory.getLogger(User.class);
+public class User_model {
+    private static final Logger logger = LoggerFactory.getLogger(User_model.class);
 
     private UUID id;            //первичный ключ
     private String email;       //email
@@ -21,17 +21,17 @@ public class User {
     private String surname;     //отчество
     private String address;     //адрес
     private String phone;       //телефон
-    private List<Role> roles;//список ролей
+    private List<Role_model> roleModels;//список ролей
 
     public static enum Status {
         ACTIVE, INACTIVE
     }
 
-    public User() {}
+    public User_model() {}
 
-    public User(UUID id, String email, String password, Status status,
-                String name, String lastname, String surname,
-                String address, String phone, List<Role> roles){
+    public User_model(UUID id, String email, String password, Status status,
+                      String name, String lastname, String surname,
+                      String address, String phone, List<Role_model> roleModels){
         this.id=id;
         this.password=password;
         this.status=status;
@@ -41,7 +41,7 @@ public class User {
         this.surname=surname;
         this.address=address;
         this.phone=phone;
-        this.roles=roles;
+        this.roleModels = roleModels;
     }
 
     public UUID getId() {
@@ -116,11 +116,11 @@ public class User {
         this.phone = phone;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public List<Role_model> getRoles() {
+        return roleModels;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRoles(List<Role_model> roleModels) {
+        this.roleModels = roleModels;
     }
 }

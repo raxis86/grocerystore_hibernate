@@ -56,25 +56,25 @@ INSERT INTO orderupdates
 VALUES
   ('c24be575-187f-4d41-82ee-ff874764b829',
    'принят');
-INSERT INTO roles
+INSERT INTO roleModels
 (ID,
  NAME)
 VALUES
   ('2597d800-eec0-4347-84fd-324d1cb8e0bb',
    'admin');
-INSERT INTO roles
+INSERT INTO roleModels
 (ID,
  NAME)
 VALUES
   ('5fe1ceeb-119f-4437-8f48-6d03949a5f8b',
    'customer');
-INSERT INTO roles
+INSERT INTO roleModels
 (ID,
  NAME)
 VALUES
   ('81446dc5-bd04-4d41-bd72-7405effb4716',
-   'user');
-INSERT INTO users
+   'userModel');
+INSERT INTO userModels
 (ID,
  ROLEID,
  NAME,
@@ -89,7 +89,7 @@ VALUES
   ('839356a3-9a4a-4764-a01e-859ba979ab25',
    '5fe1ceeb-119f-4437-8f48-6d03949a5f8b',
    'Сергей',
-   'user@mail.ru',
+   'userModel@mail.ru',
    '4D0CF81F91D55E4D666D1A6698877BE77E903A3E',
    '9OqC|tWGCjH%bZ91zupc0HN>a;',
    'Иванов',

@@ -1,8 +1,11 @@
-package grocerystore.domain.models;
+package grocerystore.domain.entityes;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,6 +15,8 @@ import java.util.UUID;
  * Created by raxis on 27.12.2016.
  * Заказ
  */
+@Entity
+@Table(name = "orders", schema = "groceriesstore")
 public class Order implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(Order.class);
 
@@ -23,6 +28,9 @@ public class Order implements Serializable {
     private Date datetime;      //дата и время заказа
     private String address;     //адрес доставки
 
+    @Id
+    @Type(type="uuid-char")
+    @Column(name = "ID", nullable = false, length = 36, columnDefinition = "char(36)")
     public UUID getId() {
         return id;
     }
@@ -31,6 +39,8 @@ public class Order implements Serializable {
         this.id = id;
     }
 
+    @Type(type="uuid-char")
+    @Column(name = "USERID", nullable = false, length = 36)
     public UUID getUserid() {
         return userid;
     }
@@ -39,6 +49,8 @@ public class Order implements Serializable {
         this.userid = userid;
     }
 
+    @Type(type="uuid-char")
+    @Column(name = "STATUSID", nullable = false, length = 36)
     public UUID getOrderstatusid() {
         return orderstatusid;
     }
@@ -47,6 +59,8 @@ public class Order implements Serializable {
         this.orderstatusid = orderstatusid;
     }
 
+    @Type(type="uuid-char")
+    @Column(name = "GROCERYLISTID", nullable = false, length = 36)
     public UUID getGrocerylistid() {
         return grocerylistid;
     }
@@ -55,6 +69,7 @@ public class Order implements Serializable {
         this.grocerylistid = grocerylistid;
     }
 
+    @Column(name = "PRICE", nullable = true, precision = 2)
     public BigDecimal getPrice() {
         return price;
     }
@@ -63,6 +78,7 @@ public class Order implements Serializable {
         this.price = price;
     }
 
+    @Column(name = "DATETIME", nullable = true)
     public Date getDatetime() {
         return datetime;
     }
@@ -71,6 +87,7 @@ public class Order implements Serializable {
         this.datetime = datetime;
     }
 
+    @Column(name = "ADDRESS", nullable = true, length = 100)
     public String getAddress() {
         return address;
     }

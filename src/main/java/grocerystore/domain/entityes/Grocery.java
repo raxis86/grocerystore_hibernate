@@ -1,8 +1,12 @@
-package grocerystore.domain.models;
+package grocerystore.domain.entityes;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -11,6 +15,8 @@ import java.util.UUID;
  * Created by raxis on 27.12.2016.
  * Класс для продуктов
  */
+@Entity
+@Table(name = "groceries", schema = "groceriesstore")
 public class Grocery implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(Grocery.class);
 
@@ -21,6 +27,11 @@ public class Grocery implements Serializable {
     private int quantity;       //количество
     private BigDecimal price;   //цена
 
+    @Id
+    @Type(type="uuid-char")
+    @Column(name = "ID", nullable = false, length = 36, columnDefinition = "char(36)")
+/*    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")*/
     public UUID getId() {
         return id;
     }
@@ -29,6 +40,8 @@ public class Grocery implements Serializable {
         this.id = id;
     }
 
+    @Column(name = "PARENTID", nullable = true, length = 36)
+    @Type(type="uuid-char")
     public UUID getParentid() {
         return parentid;
     }
@@ -37,6 +50,7 @@ public class Grocery implements Serializable {
         this.parentid = parentid;
     }
 
+    @Column(name = "ISCATEGORY", nullable = false)
     public boolean isIscategory() {
         return iscategory;
     }
@@ -45,6 +59,7 @@ public class Grocery implements Serializable {
         this.iscategory = iscategory;
     }
 
+    @Column(name = "NAME", nullable = true, length = 45)
     public String getName() {
         return name;
     }
@@ -53,6 +68,7 @@ public class Grocery implements Serializable {
         this.name = name;
     }
 
+    @Column(name = "QUANTITY", nullable = true)
     public int getQuantity() {
         return quantity;
     }
@@ -61,6 +77,7 @@ public class Grocery implements Serializable {
         this.quantity = quantity;
     }
 
+    @Column(name = "PRICE", nullable = true, precision = 2)
     public BigDecimal getPrice() {
         return price;
     }

@@ -1,6 +1,7 @@
 package grocerystore.domain.abstracts;
 
-import grocerystore.domain.models.OrderStatus;
+
+import grocerystore.domain.entityes.OrderStatus;
 
 import java.util.UUID;
 

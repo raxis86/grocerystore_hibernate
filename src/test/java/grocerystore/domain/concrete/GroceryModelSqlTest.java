@@ -1,7 +1,8 @@
+/*
 package grocerystore.domain.concrete;
 
 import grocerystore.domain.concrete.onlyjdbc.GrocerySql;
-import grocerystore.domain.models.Grocery;
+import grocerystore.domain.models.Grocery_model;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,21 +23,25 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.UUID;
 
+*/
 /**
  * Created by raxis on 02.01.2017.
- */
-public class GrocerySqlTest {
+ *//*
+
+public class GroceryModelSqlTest {
 
     private EmbeddedDatabase db;
     private GrocerySql groceryHandler;
     private DataSource ds;
-    private Grocery grocery;
-    private List<Grocery> groceryList;
+    private Grocery_model grocery;
+    private List<Grocery_model> groceryList;
 
-    /**
+    */
+/**
      * Подготавливаем тестовую БД H2 на основе скриптов
      * @throws Exception
-     */
+     *//*
+
     @Before
     public void setUp() throws Exception {
         db = new EmbeddedDatabaseBuilder()
@@ -50,7 +55,7 @@ public class GrocerySqlTest {
         groceryHandler.setDs(ds);
     }
 
-    private boolean queryAndGroceryEquals(String query, Grocery grocery){
+    private boolean queryAndGroceryEquals(String query, Grocery_model grocery){
         boolean flag=false;
 
         try(Connection connection = ds.getConnection();
@@ -73,10 +78,12 @@ public class GrocerySqlTest {
         return flag;
     }
 
-    /**
+    */
+/**
      * Тестирование метода getAll на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void getAll() throws Exception {
         groceryList = groceryHandler.getAll();
@@ -105,23 +112,27 @@ public class GrocerySqlTest {
         assertTrue(flag);
     }
 
-    /**
+    */
+/**
      * Тестирование метода getOne на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void getOne() throws Exception {
         grocery = groceryHandler.getOne(UUID.fromString("1150b23a-e004-44b2-aa6f-aec18ae69d41"));
         assertTrue(queryAndGroceryEquals("SELECT * FROM GROCERIES WHERE ID='1150b23a-e004-44b2-aa6f-aec18ae69d41'",grocery));
     }
 
-    /**
+    */
+/**
      * Тестирование метода create на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void create() throws Exception {
-        grocery = new Grocery();
+        grocery = new Grocery_model();
 
         grocery.setId(UUID.fromString("50584b25-c86b-46bf-8a4f-b6b130b42ad1"));
         grocery.setParentid(UUID.fromString("00000000-0000-0000-0000-000000000000"));
@@ -135,10 +146,12 @@ public class GrocerySqlTest {
         assertTrue(queryAndGroceryEquals("SELECT * FROM GROCERIES WHERE ID='50584b25-c86b-46bf-8a4f-b6b130b42ad1'",grocery));
     }
 
-    /**
+    */
+/**
      * Тестирование метода delete на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void delete() throws Exception {
         int i=0;
@@ -169,13 +182,15 @@ public class GrocerySqlTest {
         assertTrue(i==1);
     }
 
-    /**
+    */
+/**
      * Тестирование метода update на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void update() throws Exception {
-        grocery = new Grocery();
+        grocery = new Grocery_model();
 
         grocery.setId(UUID.fromString("1150b23a-e004-44b2-aa6f-aec18ae69d41"));
         grocery.setParentid(UUID.fromString("00000000-0000-0000-0000-000000000000"));
@@ -194,4 +209,4 @@ public class GrocerySqlTest {
         db.shutdown();
     }
 
-}
+}*/

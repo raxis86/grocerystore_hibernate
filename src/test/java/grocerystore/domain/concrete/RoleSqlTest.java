@@ -1,3 +1,4 @@
+/*
 package grocerystore.domain.concrete;
 
 import grocerystore.domain.concrete.onlyjdbc.RoleSql;
@@ -19,21 +20,25 @@ import java.util.UUID;
 
 import static org.junit.Assert.*;
 
+*/
 /**
  * Created by raxis on 03.01.2017.
- */
+ *//*
+
 public class RoleSqlTest {
 
     private EmbeddedDatabase db;
     private RoleSql roleHandler;
     private DataSource ds;
-    private Role role;
-    private List<Role> roleList;
+    private Role_model role;
+    private List<Role_model> roleList;
 
-    /**
+    */
+/**
      * Подготавливаем тестовую БД H2 на основе скриптов
      * @throws Exception
-     */
+     *//*
+
     @Before
     public void setUp() throws Exception {
         db = new EmbeddedDatabaseBuilder()
@@ -47,7 +52,7 @@ public class RoleSqlTest {
         roleHandler.setDs(ds);
     }
 
-    private boolean queryAndGroceryEquals(String query, Role role){
+    private boolean queryAndGroceryEquals(String query, Role_model role){
         boolean flag=false;
 
         try(Connection connection = ds.getConnection();
@@ -66,10 +71,12 @@ public class RoleSqlTest {
         return flag;
     }
 
-    /**
+    */
+/**
      * Тестирование метода getAll на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void getAll() throws Exception {
         roleList = roleHandler.getAll();
@@ -94,23 +101,27 @@ public class RoleSqlTest {
         assertTrue(flag);
     }
 
-    /**
+    */
+/**
      * Тестирование метода getOne на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void getOne() throws Exception {
         role = roleHandler.getOne(UUID.fromString("81446dc5-bd04-4d41-bd72-7405effb4716"));
         assertTrue(queryAndGroceryEquals("SELECT * FROM ROLES_SEC WHERE ID='81446dc5-bd04-4d41-bd72-7405effb4716'",role));
     }
 
-    /**
+    */
+/**
      * Тестирование метода create на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void create() throws Exception {
-        role = new Role();
+        role = new Role_model();
 
         role.setId(UUID.fromString("fe8eb585-d1f0-43b3-a9b8-5747f6b933ee"));
         role.setRoleName("Test");
@@ -120,10 +131,12 @@ public class RoleSqlTest {
         assertTrue(queryAndGroceryEquals("SELECT * FROM ROLES_SEC WHERE ID='fe8eb585-d1f0-43b3-a9b8-5747f6b933ee'",role));
     }
 
-    /**
+    */
+/**
      * Тестирование метода delete на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void delete() throws Exception {
         int i=0;
@@ -154,13 +167,15 @@ public class RoleSqlTest {
         assertTrue(i==1);
     }
 
-    /**
+    */
+/**
      * Тестирование метода update на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void update() throws Exception {
-        role = new Role();
+        role = new Role_model();
 
         role.setId(UUID.fromString("81446dc5-bd04-4d41-bd72-7405effb4716"));
         role.setRoleName("Test+");
@@ -181,4 +196,4 @@ public class RoleSqlTest {
         db.shutdown();
     }
 
-}
+}*/

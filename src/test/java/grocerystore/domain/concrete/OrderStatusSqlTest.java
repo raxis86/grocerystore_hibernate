@@ -1,3 +1,4 @@
+/*
 package grocerystore.domain.concrete;
 
 import grocerystore.domain.concrete.onlyjdbc.OrderStatusSql;
@@ -19,21 +20,25 @@ import java.util.UUID;
 
 import static org.junit.Assert.*;
 
+*/
 /**
  * Created by raxis on 03.01.2017.
- */
+ *//*
+
 public class OrderStatusSqlTest {
 
     private EmbeddedDatabase db;
     private OrderStatusSql orderStatusHandler;
     private DataSource ds;
-    private OrderStatus orderStatus;
-    private List<OrderStatus> orderStatusList;
+    private OrderStatus_model orderStatus;
+    private List<OrderStatus_model> orderStatusList;
 
-    /**
+    */
+/**
      * Подготавливаем тестовую БД H2 на основе скриптов
      * @throws Exception
-     */
+     *//*
+
     @Before
     public void setUp() throws Exception {
         db = new EmbeddedDatabaseBuilder()
@@ -47,7 +52,7 @@ public class OrderStatusSqlTest {
         orderStatusHandler.setDs(ds);
     }
 
-    private boolean queryAndGroceryEquals(String query, OrderStatus orderStatus){
+    private boolean queryAndGroceryEquals(String query, OrderStatus_model orderStatus){
         boolean flag=false;
 
         try(Connection connection = ds.getConnection();
@@ -66,10 +71,12 @@ public class OrderStatusSqlTest {
         return flag;
     }
 
-    /**
+    */
+/**
      * Тестирование метода getAll на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void getAll() throws Exception {
         orderStatusList = orderStatusHandler.getAll();
@@ -94,23 +101,27 @@ public class OrderStatusSqlTest {
         assertTrue(flag);
     }
 
-    /**
+    */
+/**
      * Тестирование метода getOne на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void getOne() throws Exception {
         orderStatus = orderStatusHandler.getOne(UUID.fromString("1c8d12cf-6b0a-4168-ae2a-cb416cf30da5"));
         assertTrue(queryAndGroceryEquals("SELECT * FROM ORDERUPDATES WHERE ID='1c8d12cf-6b0a-4168-ae2a-cb416cf30da5'",orderStatus));
     }
 
-    /**
+    */
+/**
      * Тестирование метода create на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void create() throws Exception {
-        orderStatus = new OrderStatus();
+        orderStatus = new OrderStatus_model();
 
         orderStatus.setId(UUID.fromString("f580a28a-24ff-4b47-8756-e7f14e15f711"));
         orderStatus.setStatus("Test");
@@ -120,10 +131,12 @@ public class OrderStatusSqlTest {
         assertTrue(queryAndGroceryEquals("SELECT * FROM ORDERUPDATES WHERE ID='f580a28a-24ff-4b47-8756-e7f14e15f711'",orderStatus));
     }
 
-    /**
+    */
+/**
      * Тестирование метода delete на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void delete() throws Exception {
         int i=0;
@@ -154,13 +167,15 @@ public class OrderStatusSqlTest {
         assertTrue(i==1);
     }
 
-    /**
+    */
+/**
      * Тестирование метода update на соответствие запросу
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void update() throws Exception {
-        orderStatus = new OrderStatus();
+        orderStatus = new OrderStatus_model();
 
         orderStatus.setId(UUID.fromString("b1ed9007-e220-4a2b-8a81-eee2ebc8e277"));
         orderStatus.setStatus("Test+");
@@ -175,4 +190,4 @@ public class OrderStatusSqlTest {
         db.shutdown();
     }
 
-}
+}*/

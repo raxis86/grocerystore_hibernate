@@ -2,8 +2,10 @@ package grocerystore.services.concrete;
 
 import grocerystore.domain.abstracts.IRepositoryRole;
 import grocerystore.domain.abstracts.IRepositoryUser;
-import grocerystore.domain.models.Role;
-import grocerystore.domain.models.User;
+import grocerystore.domain.entityes.Role;
+import grocerystore.domain.entityes.User;
+import grocerystore.domain.models.Role_model;
+import grocerystore.domain.models.User_model;
 import grocerystore.domain.exceptions.DAOException;
 import grocerystore.domain.exceptions.RoleException;
 import grocerystore.domain.exceptions.UserException;
@@ -18,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -51,20 +54,20 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User formUser(String email, String password, String name,
-                         String lastname, String surname, String address,
-                         String phone, String roleName) throws UserServiceException, FormUserException {
+    public User_model formUser(String email, String password, String name,
+                               String lastname, String surname, String address,
+                               String phone, String roleName) throws UserServiceException, FormUserException {
 
         Message message = new Message();
-        User user = new User();
-        User userByEmail = null;
-        Role roleByName = null;
-        List<Role> roleList = new ArrayList<>();
+        User_model userModel = new User_model();
+        User_model userModelByEmail;
+        Role_model roleModelByName;
+        List<Role_model> roleModelList = new ArrayList<>();
 
         try {
-            roleByName = roleHandler.roleByRoleName(roleName);
-            roleList.add(roleByName);
-            userByEmail = userHandler.getOneByEmail(email);
+            roleModelByName = convert(roleHandler.roleByRoleName(roleName));
+            roleModelList.add(roleModelByName);
+            userModelByEmail = convert(userHandler.getOneByEmail(email));
         } catch (UserException e) {
             logger.error("cant getOneByEmail",e);
             throw new UserServiceException("Невозможно определить пользователя!",e);
@@ -90,89 +93,97 @@ public class UserService implements IUserService {
             message.addErrorMessage(e.getMessage());
         }
 
-        if(userByEmail!=null){
+        if(userModelByEmail !=null){
             message.addErrorMessage("Пользователь с таким email уже существует в базе!");
         }
 
-        if(roleByName==null){
+        if(roleModelByName ==null){
             message.addErrorMessage("Роли с таким наименованием не существует!");
         }
 
         if(message.isOk()){
-            user.setId(UUID.randomUUID());
-            user.setEmail(email.toLowerCase());
-            user.setPassword(Tool.computeHash(password));
-            user.setStatus(User.Status.ACTIVE);
-            user.setName(name);
-            user.setLastname(lastname);
-            user.setSurname(surname);
-            user.setPhone(phone);
-            user.setAddress(address);
-            user.setRoles(roleList);
+            userModel.setId(UUID.randomUUID());
+            userModel.setEmail(email.toLowerCase());
+            userModel.setPassword(Tool.computeHash(password));
+            userModel.setStatus(User_model.Status.ACTIVE);
+            userModel.setName(name);
+            userModel.setLastname(lastname);
+            userModel.setSurname(surname);
+            userModel.setPhone(phone);
+            userModel.setAddress(address);
+            userModel.setRoles(roleModelList);
         }
         else {
             throw new FormUserException(message);
         }
 
-        return user;
+        return userModel;
     }
 
     @Override
-    public User formUserFromRepo(String email, String password) throws UserServiceException, FormUserException {
+    public User_model formUserFromRepo(String email, String password) throws UserServiceException, FormUserException {
         //Ищем, что существует юзер с таким email
         Message message = new Message();
-        User user;
-        User userByEmail;
+        User_model userModel=null;
+        User_model userModelByEmail;
 
         try {
-            userByEmail = userHandler.getOneByEmail(email);
+            userModelByEmail = convert(userHandler.getOneByEmail(email));
         } catch (UserException e) {
             logger.error("cant getOneByEmail",e);
             throw new UserServiceException("Невозможно проверить пользователя!",e);
         }
 
-        if(userByEmail==null){
+        if(userModelByEmail ==null){
             message.addErrorMessage("Пользователь с таким email не найден!");
             throw new FormUserException(message);
         }
 
         try {
-            user = userHandler.getOne(email.toLowerCase(), Tool.computeHash(password));
+            User user = userHandler.getOne(email.toLowerCase(), Tool.computeHash(password));
+            if(user!=null){
+                userModel = convert(user);
+                userModel.setRoles(convertRoleList(user.getRoles()));
+            }
         } catch (UserException e) {
             logger.error("cant getOn",e);
             throw new UserServiceException("Невозможно определить пользователя!",e);
         }
 
-        if(user==null){
+        if(userModel ==null){
             message.addErrorMessage("Неверный пароль!");
             throw new FormUserException(message);
         }
 
-        return user;
+        return userModel;
     }
 
     @Override
-    public User formUserFromRepo(String email) throws UserServiceException, FormUserException {
+    public User_model formUserFromRepo(String email) throws UserServiceException, FormUserException {
         Message message = new Message();
-        User user;
+        User_model userModel=null;
 
         try {
-            user = userHandler.getOneByEmail(email);
+            User user = userHandler.getOneByEmail(email);
+            if(user!=null){
+                userModel = convert(user);
+                userModel.setRoles(convertRoleList(user.getRoles()));
+            }
         } catch (UserException e) {
             logger.error("cant getOneByEmail",e);
             throw new UserServiceException("Невозможно проверить пользователя!",e);
         }
 
-        if(user==null){
+        if(userModel ==null){
             message.addErrorMessage("Пользователь с таким email не найден!");
             throw new FormUserException(message);
         }
 
-        return user;
+        return userModel;
     }
 
     @Override
-    public void updateUser(User user, String name, String lastname,
+    public void updateUser(User_model userModel, String name, String lastname,
                            String surname, String address, String phone) throws UserServiceException {
         try {
             nameValidator.validate(name);
@@ -181,17 +192,77 @@ public class UserService implements IUserService {
         } catch (ValidateException e) {
             throw new UserServiceException(e.getMessage(),e);
         }
-        user.setName(name);
-        user.setLastname(lastname);
-        user.setSurname(surname);
-        user.setAddress(address);
-        user.setPhone(phone);
+        userModel.setName(name);
+        userModel.setLastname(lastname);
+        userModel.setSurname(surname);
+        userModel.setAddress(address);
+        userModel.setPhone(phone);
 
         try {
-            userHandler.update(user);
+            userHandler.update(convert(userModel));
         } catch (DAOException e) {
-            logger.error("cant update user",e);
+            logger.error("cant update userModel",e);
             throw new UserServiceException("Невозможно сохранить изменения!",e);
         }
+    }
+
+    private User_model convert(User user){
+        User_model user_model = new User_model();
+        user_model.setId(user.getId());
+        user_model.setEmail(user.getEmail());
+        user_model.setStatus(User_model.Status.valueOf(user.getStatus()));
+        user_model.setPassword(user.getPassword());
+        user_model.setName(user.getName());
+        user_model.setLastname(user.getLastname());
+        user_model.setSurname(user.getSurname());
+        user_model.setAddress(user.getAddress());
+        user_model.setPhone(user.getPhone());
+
+        return user_model;
+    }
+
+    private List<Role_model> convertRoleList(List<Role> roleList){
+        List<Role_model> role_modelList = new ArrayList<>();
+        for(Role role:roleList){
+            role_modelList.add(convert(role));
+        }
+
+        return role_modelList;
+    }
+
+    private Role_model convert(Role role){
+        Role_model role_model = new Role_model();
+        role_model.setId(role.getId());
+        role_model.setRoleName(role.getRoleName());
+
+        return role_model;
+    }
+
+    private List<User_model> convertUserList(List<User> userList){
+        List<User_model> user_modelList = new ArrayList<>();
+        for(User u:userList){
+            user_modelList.add(convert(u));
+        }
+        return user_modelList;
+    }
+
+    private User convert(User_model user_model) throws DAOException {
+        User user = new User();
+        user.setId(user_model.getId());
+        user.setEmail(user_model.getEmail());
+        user.setPassword(user_model.getPassword());
+        user.setStatus(user_model.getStatus().toString());
+        user.setName(user_model.getName());
+        user.setLastname(user_model.getLastname());
+        user.setSurname(user_model.getSurname());
+        user.setPhone(user_model.getPhone());
+        user.setAddress(user_model.getAddress());
+
+        List<Role> roleList = new ArrayList<>();
+        for(Role_model role_model:user_model.getRoles()){
+            roleList.add(roleHandler.getOne(role_model.getId()));
+        }
+        user.setRoles(roleList);
+        return user;
     }
 }

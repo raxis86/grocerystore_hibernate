@@ -1,3 +1,4 @@
+/*
 package grocerystore.domain.concrete.onlyjdbc;
 
 import grocerystore.domain.abstracts.IRepositoryGrocery;
@@ -14,22 +15,26 @@ import java.util.UUID;
 
 import static grocerystore.constants.Constants.*;
 
+*/
 /**
  * Created by raxis on 27.12.2016.
  * Реализакция DAO для работы с grocery в MySQL
- */
-/*@Repository*/
+ *//*
+
+*/
+/*@Repository*//*
+
 public class GrocerySql extends SQLImplementation implements IRepositoryGrocery {
     private static final Logger logger = LoggerFactory.getLogger(GrocerySql.class);
 
     @Override
-    public List<Grocery> getAll() throws GroceryException {
-        List<Grocery> groceryList = new ArrayList<>();
+    public List<Grocery_model> getAll() throws GroceryException {
+        List<Grocery_model> groceryList = new ArrayList<>();
         try(Connection connection = getDs().getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(GROCERY_SELECTALL_QUERY);) {
             while (resultSet.next()){
-                Grocery grocery = new Grocery();
+                Grocery_model grocery = new Grocery_model();
                 grocery.setId(UUID.fromString(resultSet.getString("ID")));
                 grocery.setParentid(UUID.fromString(resultSet.getString("PARENTID")));
                 grocery.setIscategory(resultSet.getBoolean("ISCATEGORY"));
@@ -39,21 +44,21 @@ public class GrocerySql extends SQLImplementation implements IRepositoryGrocery 
                 groceryList.add(grocery);
             }
         } catch (SQLException e) {
-            logger.error("Cant select List of Grocery",e);
+            logger.error("Cant select List of Grocery_model",e);
             throw new GroceryException("Проблема с базой данных: невозможно получить записи из таблицы продуктов!",e);
         }
         return groceryList;
     }
 
     @Override
-    public Grocery getOne(UUID id) throws GroceryException {
-        Grocery grocery = null;
+    public Grocery_model getOne(UUID id) throws GroceryException {
+        Grocery_model grocery = null;
         try(Connection connection = getDs().getConnection();
             PreparedStatement statement = connection.prepareStatement(GROCERY_PREP_SELECTONE_QUERY);) {
             statement.setObject(1,id.toString());
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()){
-                grocery = new Grocery();
+                grocery = new Grocery_model();
                 grocery.setId(UUID.fromString(resultSet.getString("ID")));
                 grocery.setParentid(UUID.fromString(resultSet.getString("PARENTID")));
                 grocery.setIscategory(resultSet.getBoolean("ISCATEGORY"));
@@ -63,14 +68,14 @@ public class GrocerySql extends SQLImplementation implements IRepositoryGrocery 
             }
             resultSet.close();
         } catch (SQLException e) {
-            logger.error("Cant getOne Grocery!", e);
+            logger.error("Cant getOne Grocery_model!", e);
             throw new GroceryException("Проблема с базой данных: невозможно получить запись из таблицы продуктов!",e);
         }
         return grocery;
     }
 
     @Override
-    public boolean create(Grocery entity) throws GroceryException {
+    public boolean create(Grocery_model entity) throws GroceryException {
         try(Connection connection = getDs().getConnection();
             PreparedStatement statement = connection.prepareStatement(GROCERY_PREP_INSERT_QUERY);) {
             statement.setObject(1,entity.getId().toString());
@@ -101,7 +106,7 @@ public class GrocerySql extends SQLImplementation implements IRepositoryGrocery 
     }
 
     @Override
-    public boolean update(Grocery entity) throws GroceryException {
+    public boolean update(Grocery_model entity) throws GroceryException {
         try(Connection connection = getDs().getConnection();
             PreparedStatement statement=connection.prepareStatement(GROCERY_PREP_UPDATE_QUERY);) {
             statement.setObject(1,entity.getParentid().toString());
@@ -118,3 +123,4 @@ public class GrocerySql extends SQLImplementation implements IRepositoryGrocery 
         return true;
     }
 }
+*/

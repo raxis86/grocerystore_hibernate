@@ -1,9 +1,10 @@
 package grocerystore.services.concrete;
 
 import grocerystore.domain.abstracts.IRepositoryListGrocery;
-import grocerystore.domain.models.Grocery;
-import grocerystore.domain.models.ListGrocery;
-import grocerystore.domain.models.Order;
+import grocerystore.domain.entityes.ListGrocery;
+import grocerystore.domain.models.Grocery_model;
+import grocerystore.domain.models.ListGrocery_model;
+import grocerystore.domain.models.Order_model;
 import grocerystore.domain.exceptions.DAOException;
 import grocerystore.services.abstracts.IListGroceryService;
 import grocerystore.services.exceptions.ListGroceryServiceException;
@@ -33,24 +34,33 @@ public class ListGroceryService implements IListGroceryService {
     /**
      * Создание списка продуктов соответствующих заказу
      * @param cart
-     * @param order
+     * @param orderModel
      * @throws DAOException
      */
     @Override
     @Secured("ROLE_USER")
-    public void createListGrocery(Cart cart, Order order) throws ListGroceryServiceException {
+    public void createListGrocery(Cart cart, Order_model orderModel) throws ListGroceryServiceException {
         for(Map.Entry entry : cart.getMap().entrySet()){
-            ListGrocery listGrocery = new ListGrocery();
-            listGrocery.setId(order.getGrocerylistid());
-            listGrocery.setGroceryId(((Grocery)entry.getKey()).getId());
-            listGrocery.setQuantity((int)entry.getValue());
+            ListGrocery_model listGroceryModel = new ListGrocery_model();
+            listGroceryModel.setId(orderModel.getGrocerylistid());
+            listGroceryModel.setGroceryId(((Grocery_model)entry.getKey()).getId());
+            listGroceryModel.setQuantity((int)entry.getValue());
 
             try {
-                listGroceryHandler.create(listGrocery);
+                listGroceryHandler.create(convert(listGroceryModel));
             } catch (DAOException e) {
                 logger.error("cant create",e);
                 throw new ListGroceryServiceException("Невозможно завершить формирование корзины!",e);
             }
         }
+    }
+
+    private ListGrocery convert(ListGrocery_model ListGrocery_model){
+        ListGrocery listGrocery = new ListGrocery();
+        listGrocery.setId(ListGrocery_model.getId());
+        listGrocery.setGroceryId(ListGrocery_model.getGroceryId());
+        listGrocery.setQuantity(ListGrocery_model.getQuantity());
+
+        return listGrocery;
     }
 }

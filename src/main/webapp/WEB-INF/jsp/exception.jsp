@@ -4,7 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
-  User: raxis
+  User_model: raxis
   Date: 25.12.2016
   Time: 16:11
   To change this template use File | Settings | File Templates.

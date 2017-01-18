@@ -3,7 +3,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
-  User: raxis
+  User_model: raxis
   Date: 20.12.2016
   Time: 16:23
   To change this template use File | Settings | File Templates.
@@ -67,7 +67,7 @@
                 <td>${order.getPrice()}</td>
                 <td>${order.getAddress()}</td>
                 <td>
-                    <p><select size="order.getStatuses().size()" name="statusid">
+                    <p><select size="orderModel.getStatuses().size()" name="statusid">
                         <c:forEach items="${order.getStatuses()}" var="status">
                             <option name="statusid" value="${status.key}">${status.value}</option>
                         </c:forEach>

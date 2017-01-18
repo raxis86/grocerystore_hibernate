@@ -1,7 +1,8 @@
 package grocerystore.services.concrete;
 
 import grocerystore.domain.abstracts.IRepositoryGrocery;
-import grocerystore.domain.models.Grocery;
+import grocerystore.domain.entityes.Grocery;
+import grocerystore.domain.models.Grocery_model;
 import grocerystore.domain.exceptions.DAOException;
 import grocerystore.services.abstracts.ICartService;
 import grocerystore.services.exceptions.CartServiceException;
@@ -35,17 +36,17 @@ public class CartService implements ICartService {
     @Override
     @Secured("ROLE_USER")
     public void addToCart(Cart cart, String groceryid) throws CartServiceException {
-        Grocery grocery = null;
+        Grocery_model groceryModel;
 
         try {
-            grocery = groceryHandler.getOne(UUID.fromString(groceryid));
+            groceryModel = convert(groceryHandler.getOne(UUID.fromString(groceryid)));
         } catch (DAOException e) {
-            logger.error("cant grocery.getOne",e);
+            logger.error("cant groceryModel.getOne",e);
             throw new CartServiceException("Невозможно добавить продукт в корзину!",e);
         }
 
-        if(grocery!=null){
-            cart.addItem(grocery,1);
+        if(groceryModel !=null){
+            cart.addItem(groceryModel,1);
         }
     }
 
@@ -57,15 +58,27 @@ public class CartService implements ICartService {
     @Override
     @Secured("ROLE_USER")
     public void removeFromCart(Cart cart, String groceryid) throws CartServiceException {
-        Grocery grocery = null;
+        Grocery_model groceryModel = null;
         try {
-            grocery = groceryHandler.getOne(UUID.fromString(groceryid));
+            groceryModel = convert(groceryHandler.getOne(UUID.fromString(groceryid)));
         } catch (DAOException e) {
-            logger.error("cant grocery.getOne",e);
+            logger.error("cant groceryModel.getOne",e);
             throw new CartServiceException("Невозможно удалить продукт из корзины!",e);
         }
-        if(grocery!=null){
-            cart.removeItem(grocery);
+        if(groceryModel !=null){
+            cart.removeItem(groceryModel);
         }
+    }
+
+    private Grocery_model convert(Grocery grocery){
+        Grocery_model grocery_model = new Grocery_model();
+        grocery_model.setId(grocery.getId());
+        grocery_model.setParentid(grocery.getParentid());
+        grocery_model.setName(grocery.getName());
+        grocery_model.setPrice(grocery.getPrice());
+        grocery_model.setIscategory(grocery.isIscategory());
+        grocery_model.setQuantity(grocery.getQuantity());
+
+        return grocery_model;
     }
 }

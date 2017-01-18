@@ -18,13 +18,23 @@
         <property name="hibernate.dbcp.maxIdle">20</property>
         <property name="hibernate.dbcp.minIdle">0</property>
 
-        <mapping class="grocerystore.domain.entityes.GroceriesEntity"/>
+
+
+        <mapping class="grocerystore.domain.entityes.Grocery"/>
+        <mapping class="grocerystore.domain.entityes.ListGrocery"/>
+        <mapping class="grocerystore.domain.entityes.Order"/>
+        <mapping class="grocerystore.domain.entityes.OrderStatus"/>
+        <mapping class="grocerystore.domain.entityes.Role"/>
+        <mapping class="grocerystore.domain.entityes.User"/>
+        <!--<mapping class="grocerystore.domain.entityes.GroceriesEntity"/>
         <mapping class="grocerystore.domain.entityes.ListGroceryEntity"/>
         <mapping class="grocerystore.domain.entityes.OrdersEntity"/>
         <mapping class="grocerystore.domain.entityes.RolesEntity"/>
         <mapping class="grocerystore.domain.entityes.UsersEntity"/>
-        <mapping class="grocerystore.domain.entityes.OrderupdatesEntity"/>
+        <mapping class="grocerystore.domain.entityes.OrderupdatesEntity"/>-->
         <!--<property name="hbm2ddl.auto">update</property>-->
     </session-factory>
+
+
 </hibernate-configuration>
 

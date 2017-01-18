@@ -1,3 +1,4 @@
+/*
 package grocerystore.domain.concrete.onlyjdbc;
 
 import grocerystore.domain.abstracts.IRepositoryRole;
@@ -14,21 +15,23 @@ import java.util.UUID;
 
 import static grocerystore.constants.Constants.*;
 
+*/
 /**
  * Created by raxis on 13.01.2017.
- */
+ *//*
+
 @Repository
 public class RoleSql extends SQLImplementation implements IRepositoryRole {
     private static final Logger logger = LoggerFactory.getLogger(RoleSql.class);
 
     @Override
-    public List<Role> getAll() throws RoleException {
-        List<Role> roleList = new ArrayList<>();
+    public List<Role_model> getAll() throws RoleException {
+        List<Role_model> roleList = new ArrayList<>();
         try(Connection connection = getDs().getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet=statement.executeQuery(ROLESEC_SELECTALL_QUERY);) {
             while (resultSet.next()){
-                Role role = new Role();
+                Role_model role = new Role_model();
                 role.setId(UUID.fromString(resultSet.getString("ID")));
                 role.setRoleName(resultSet.getString("ROLENAME"));
                 roleList.add(role);
@@ -41,28 +44,28 @@ public class RoleSql extends SQLImplementation implements IRepositoryRole {
     }
 
     @Override
-    public Role getOne(UUID id) throws RoleException {
-        Role role = null;
+    public Role_model getOne(UUID id) throws RoleException {
+        Role_model role = null;
         try(Connection connection = getDs().getConnection();
             PreparedStatement statement = connection.prepareStatement(ROLESEC_PREP_SELECTONE_QUERY)) {
             statement.setObject(1,id.toString());
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()){
-                role = new Role();
+                role = new Role_model();
                 role.setId(UUID.fromString(resultSet.getString("ID")));
                 role.setRoleName(resultSet.getString("ROLENAME"));
 
             }
             resultSet.close();
         } catch (SQLException e) {
-            logger.error("Cant getOne Role!", e);
+            logger.error("Cant getOne Role_model!", e);
             throw new RoleException("Проблема с базой данных: невозможно получить запись из таблицы ролей!",e);
         }
         return role;
     }
 
     @Override
-    public boolean create(Role entity) throws RoleException {
+    public boolean create(Role_model entity) throws RoleException {
         try(Connection connection = getDs().getConnection();
             PreparedStatement statement = connection.prepareStatement(ROLESEC_PREP_INSERT_QUERY);) {
             statement.setObject(1,entity.getId().toString());
@@ -89,7 +92,7 @@ public class RoleSql extends SQLImplementation implements IRepositoryRole {
     }
 
     @Override
-    public boolean update(Role entity) throws RoleException {
+    public boolean update(Role_model entity) throws RoleException {
         try(Connection connection = getDs().getConnection();
             PreparedStatement statement=connection.prepareStatement(ROLESEC_PREP_UPDATE_QUERY);) {
             statement.setObject(1,entity.getRoleName());
@@ -103,44 +106,45 @@ public class RoleSql extends SQLImplementation implements IRepositoryRole {
     }
 
     @Override
-    public Role roleByRoleName(String roleName) throws RoleException {
-        Role role = null;
+    public Role_model roleByRoleName(String roleName) throws RoleException {
+        Role_model role = null;
         try(Connection connection = getDs().getConnection();
             PreparedStatement statement = connection.prepareStatement(ROLESEC_PREP_SELECTONE_BY_NAME_QUERY)) {
             statement.setObject(1,roleName);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()){
-                role = new Role();
+                role = new Role_model();
                 role.setId(UUID.fromString(resultSet.getString("ID")));
                 role.setRoleName(resultSet.getString("ROLENAME"));
 
             }
             resultSet.close();
         } catch (SQLException e) {
-            logger.error("Cant getOne Role!", e);
+            logger.error("Cant getOne Role_model!", e);
             throw new RoleException("Проблема с базой данных: невозможно получить запись из таблицы ролей!",e);
         }
         return role;
     }
 
     @Override
-    public List<Role> getAllByUserId(UUID id) throws RoleException {
-        List<Role> roleList = new ArrayList<>();
+    public List<Role_model> getAllByUserId(UUID id) throws RoleException {
+        List<Role_model> roleList = new ArrayList<>();
         try(Connection connection = getDs().getConnection();
             PreparedStatement statement = connection.prepareStatement(ROLESEC_PREP_SELECTALL_BY_USERID_QUERY)) {
             statement.setObject(1,id.toString());
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()){
-                Role role = new Role();
+                Role_model role = new Role_model();
                 role.setId(UUID.fromString(resultSet.getString("ID")));
                 role.setRoleName(resultSet.getString("ROLENAME"));
                 roleList.add(role);
             }
             resultSet.close();
         } catch (SQLException e) {
-            logger.error("Cant getAllByUserId(UUID id) Role!", e);
+            logger.error("Cant getAllByUserId(UUID id) Role_model!", e);
             throw new RoleException("Проблема с базой данных: невозможно получить запись из таблицы ролей!",e);
         }
         return roleList;
     }
 }
+*/

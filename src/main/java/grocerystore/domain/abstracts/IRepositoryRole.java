@@ -1,6 +1,6 @@
 package grocerystore.domain.abstracts;
 
-import grocerystore.domain.models.Role;
+import grocerystore.domain.entityes.Role;
 import grocerystore.domain.exceptions.RoleException;
 
 import java.util.List;

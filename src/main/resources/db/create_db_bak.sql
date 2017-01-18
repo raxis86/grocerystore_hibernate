@@ -25,11 +25,11 @@ CREATE TABLE orderupdates (
   ID char(36) NOT NULL,
   STATUS varchar(45) NOT NULL,
   PRIMARY KEY (ID));
-CREATE TABLE roles (
+CREATE TABLE roleModels (
   ID char(36) NOT NULL,
   NAME varchar(45) NOT NULL,
   PRIMARY KEY (ID));
-CREATE TABLE users (
+CREATE TABLE userModels (
   ID char(36) NOT NULL,
   ROLEID char(36) NOT NULL,
   NAME varchar(100) DEFAULT NULL,

@@ -80,7 +80,7 @@ INSERT INTO users_sec
  PHONE)
 VALUES
   ('839356a3-9a4a-4764-a01e-859ba979ab25',
-   'user@mail.ru',
+   'userModel@mail.ru',
    '$2a$10$noOo/7kXbsf3VClbMogKE.iq8totYmERfhKntGq6sGKpCR30zOH16',
    'ACTIVE',
    'Сергей',

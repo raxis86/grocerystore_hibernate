@@ -1,6 +1,6 @@
 package grocerystore.services.models;
 
-import grocerystore.domain.models.Grocery;
+import grocerystore.domain.models.Grocery_model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,26 +17,26 @@ public class Cart {
     /**
      * Хэш-мап для огранизации хранения товаров
      */
-    private Map<Grocery,Integer> map = new HashMap<>();
+    private Map<Grocery_model,Integer> map = new HashMap<>();
 
-    public Map<Grocery, Integer> getMap() {
+    public Map<Grocery_model, Integer> getMap() {
         return map;
     }
 
     /**
      * Добавление товара
-     * @param grocery - продукт
+     * @param groceryModel - продукт
      * @param quantity - количество
      */
-    public void addItem(Grocery grocery, Integer quantity){
-        Integer sum=map.put(grocery,quantity);
+    public void addItem(Grocery_model groceryModel, Integer quantity){
+        Integer sum=map.put(groceryModel,quantity);
         if(sum!=null){
-            map.put(grocery,quantity+sum);
+            map.put(groceryModel,quantity+sum);
         }
     }
 
-    public void removeItem(Grocery grocery){
-        map.remove(grocery);
+    public void removeItem(Grocery_model groceryModel){
+        map.remove(groceryModel);
     }
 
     /**
@@ -49,7 +49,7 @@ public class Cart {
         BigDecimal quan=BigDecimal.valueOf(0);
 
         for(HashMap.Entry entry: map.entrySet()){
-            price=((Grocery)entry.getKey()).getPrice();
+            price=((Grocery_model)entry.getKey()).getPrice();
             quan=BigDecimal.valueOf((Integer)entry.getValue());
             priceSum=priceSum.add(price.multiply(quan));
         }
